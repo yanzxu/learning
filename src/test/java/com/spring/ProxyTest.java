@@ -1,5 +1,7 @@
 package com.spring;
 
+import com.spring.JDKproxy.Animal;
+import com.spring.JDKproxy.JDKDogProxy;
 import com.spring.staticproxy.StaticProxyImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,10 +15,18 @@ public class ProxyTest {
 
     @Autowired
     private StaticProxyImpl staticProxy;
+    @Autowired
+    private JDKDogProxy jdkDogProxy;
 
 
     @Test
     public void tetStaticProxy() {
         staticProxy.delete();
+    }
+
+    @Test
+    public void testJDKProxy() {
+        Animal dog = jdkDogProxy.getJDKProxy();
+        dog.printName();
     }
 }
