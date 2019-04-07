@@ -2,6 +2,8 @@ package com.spring;
 
 import com.spring.JDKproxy.Animal;
 import com.spring.JDKproxy.JDKDogProxy;
+import com.spring.cglibproxy.CglibProxy;
+import com.spring.cglibproxy.UserService;
 import com.spring.staticproxy.StaticProxyImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,7 +19,10 @@ public class ProxyTest {
     private StaticProxyImpl staticProxy;
     @Autowired
     private JDKDogProxy jdkDogProxy;
-
+    @Autowired
+    private CglibProxy cglibProxy;
+    @Autowired
+    private UserService userService;
 
     @Test
     public void tetStaticProxy() {
@@ -28,5 +33,13 @@ public class ProxyTest {
     public void testJDKProxy() {
         Animal dog = jdkDogProxy.getJDKProxy();
         dog.printName();
+    }
+
+    @Test
+    public void testCglibProxy(){
+        UserService proxyInstance = (UserService) cglibProxy.getProxyInstance(userService);
+        proxyInstance.print();
+        System.out.println("-------------------------------");
+        proxyInstance.printClassName();
     }
 }
