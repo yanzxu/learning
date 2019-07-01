@@ -1,16 +1,21 @@
 buildscript {
 	ext {
-		springBootVersion = '2.1.5.BUILD-SNAPSHOT'
+		springBootVersion = '1.5.10.RELEASE'
 	}
 	repositories {
 		maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
 		maven { url "https://maven.aliyun.com/repository/spring-plugin" }
 	}
 	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:2.1.5.BUILD-SNAPSHOT")
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
 		classpath 'io.spring.gradle:propdeps-plugin:0.0.9.RELEASE'
 	}
 }
+apply plugin: 'base'
+apply plugin: 'java'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'groovy'
+
 
 apply plugin: 'io.spring.dependency-management'
 
