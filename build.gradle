@@ -1,6 +1,15 @@
-plugins {
-	id 'org.springframework.boot' version '2.1.5.BUILD-SNAPSHOT'
-	id 'java'
+buildscript {
+	ext {
+		springBootVersion = '2.1.5.BUILD-SNAPSHOT'
+	}
+	repositories {
+		maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
+		maven { url "https://maven.aliyun.com/repository/spring-plugin" }
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:2.1.5.BUILD-SNAPSHOT")
+		classpath 'io.spring.gradle:propdeps-plugin:0.0.9.RELEASE'
+	}
 }
 
 apply plugin: 'io.spring.dependency-management'
@@ -18,4 +27,6 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-aop'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	compile('org.springframework.boot:spring-boot-starter-web')
+
 }
