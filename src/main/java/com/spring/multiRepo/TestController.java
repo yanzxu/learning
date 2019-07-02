@@ -15,6 +15,6 @@ public class TestController {
 
     @RequestMapping(path = "/", method = RequestMethod.GET)
     public ResponseEntity test(){
-        return ResponseEntity.ok("==== fail ====");
+        return ResponseEntity.ok("==== fail =====");
     }
 }
