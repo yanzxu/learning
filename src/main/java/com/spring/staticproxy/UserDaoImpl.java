@@ -6,6 +6,6 @@ import org.springframework.stereotype.Component;
 public class UserDaoImpl implements UserDao {
     @Override
     public void delete() {
-        System.out.println("==== 进行删除业务处理 ====");
+        System.out.println("====  进行删除业务处理 ====");
     }
 }
