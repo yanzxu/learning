@@ -33,6 +33,10 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-aop'
 //	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	implementation 'commons-codec:commons-codec:1.10'
+	implementation 'org.bouncycastle:bcprov-jdk15on:1.61'
+
 	implementation 'org.projectlombok:lombok'
 	implementation 'com.google.code.gson:gson'
 	compile('org.reflections:reflections:0.9.9')
