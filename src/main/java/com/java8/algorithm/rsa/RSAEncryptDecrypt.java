@@ -1,7 +1,6 @@
 package com.java8.algorithm.rsa;
 
 
-
 import javax.crypto.Cipher;
 import java.security.Key;
 import java.util.Base64;
@@ -17,6 +16,7 @@ public class RSAEncryptDecrypt {
     }
 
     public static String decrypt(String encryptedData, Key publicKey) {
+
         if (encryptedData != null && publicKey != null) {
             return new String(convert(Base64.getDecoder().decode(encryptedData), publicKey, Cipher.DECRYPT_MODE));
         }
