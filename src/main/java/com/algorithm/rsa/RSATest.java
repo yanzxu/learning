@@ -1,4 +1,4 @@
-package com.java8.algorithm.rsa;
+package com.algorithm.rsa;
 
 import java.security.KeyPair;
 

@@ -1,4 +1,4 @@
-package com.java8.algorithm.rsa.getkeyfromfile;
+package com.algorithm.rsa.getkeyfromfile;
 
 import java.io.File;
 import java.io.FileOutputStream;

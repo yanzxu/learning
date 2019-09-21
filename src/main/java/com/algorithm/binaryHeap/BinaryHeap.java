@@ -1,4 +1,4 @@
-package com.java8.algorithm.binaryHeap;
+package com.algorithm.binaryHeap;
 
 import java.util.Arrays;
 

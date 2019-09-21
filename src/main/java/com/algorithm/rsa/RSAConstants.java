@@ -1,4 +1,4 @@
-package com.java8.algorithm.rsa;
+package com.algorithm.rsa;
 
 public final class RSAConstants {
     public static final String ALGORITHM = "RSA";

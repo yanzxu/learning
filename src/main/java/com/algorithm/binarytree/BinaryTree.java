@@ -1,4 +1,4 @@
-package com.java8.algorithm.binarytree;
+package com.algorithm.binarytree;
 
 import java.util.*;
 

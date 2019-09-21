@@ -1,6 +1,6 @@
-package com.java8.algorithm.rsa.getkeyfromfile;
+package com.algorithm.rsa.getkeyfromfile;
 
-import com.java8.algorithm.rsa.RSAConstants;
+import com.algorithm.rsa.RSAConstants;
 import org.apache.commons.codec.binary.Base64;
 
 import javax.crypto.BadPaddingException;

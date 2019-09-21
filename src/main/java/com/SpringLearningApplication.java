@@ -1,4 +1,4 @@
-package com.spring;
+package com;
 
 import com.spring.ioc.MyBeanFactoryImpl;
 import com.spring.ioc.Student;

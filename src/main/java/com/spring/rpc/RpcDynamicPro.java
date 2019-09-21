@@ -14,7 +14,6 @@ import java.net.Socket;
 import java.net.SocketTimeoutException;
 
 @Component
-@Slf4j
 public class RpcDynamicPro implements InvocationHandler {
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
@@ -34,7 +33,6 @@ public class RpcDynamicPro implements InvocationHandler {
             String responsJson = buf.readLine();
             response = gson.fromJson(responsJson, Response.class);
         }catch(SocketTimeoutException e){
-            log.info("Time out, No response");
         }
         if(client != null){
             //如果构造函数建立起了连接，则关闭套接字，如果没有建立起连接，自然不用关闭
