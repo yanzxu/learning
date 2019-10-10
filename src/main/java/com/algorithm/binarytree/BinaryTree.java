@@ -9,11 +9,11 @@ public class BinaryTree {
         LinkedList nodeList = new LinkedList<>(Arrays.asList(3, 2, 9, null, null, 10, null, null, 8, null, 4));
         TreeNode treeNode = binaryTree.createTree(nodeList);
 
-//        System.out.println("===== pre order ======");
-//        preOrderTravel(treeNode);
-//
-//        System.out.println("===== in order ======");
-//        inOrderTravel(treeNode);
+        System.out.println("===== pre order ======");
+        preOrderTravel(treeNode);
+
+        System.out.println("===== in order ======");
+        inOrderTravel(treeNode);
 //
 //        System.out.println("===== post order ======");
 //        postOrderTravel(treeNode);
@@ -26,7 +26,7 @@ public class BinaryTree {
 //        System.out.println("==== without recursion post order ====");
 //        postOrderWithoutRecursion(treeNode);
 
-        printTreeByFloor(treeNode);
+//        printTreeByFloor(treeNode);
     }
 
     public static void printTreeByFloor(TreeNode node) {
