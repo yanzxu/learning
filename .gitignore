@@ -28,3 +28,4 @@ HELP.md
 
 ### VS Code ###
 .vscode/
+/spring5/build/tmp/war/MANIFEST.MF
