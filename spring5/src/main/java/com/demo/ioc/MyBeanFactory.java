@@ -1,4 +1,4 @@
-package com.demo.core;
+package com.demo.ioc;
 
 /**
  * 所有IOC容器的顶层设计

@@ -1,4 +1,4 @@
-package com.demo.core;
+package com.demo.ioc;
 
 /**
  * 用于封装创建后的对象实例，代理对象或者原生对象都由该BeanWrapper保存

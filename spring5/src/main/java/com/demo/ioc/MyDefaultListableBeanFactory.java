@@ -1,4 +1,4 @@
-package com.demo.core;
+package com.demo.ioc;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;

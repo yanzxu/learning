@@ -1,4 +1,4 @@
-package com.demo.core;
+package com.demo.ioc;
 
 import com.xyz.demo.core.annotaion.MyAutowired;
 import com.xyz.demo.core.annotaion.MyController;

@@ -1,4 +1,4 @@
-package com.demo.core;
+package com.demo.ioc;
 
 /**
  * 用于保存bean相关的配置信息

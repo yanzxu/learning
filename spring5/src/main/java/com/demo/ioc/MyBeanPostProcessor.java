@@ -1,4 +1,4 @@
-package com.demo.core;
+package com.demo.ioc;
 
 public class MyBeanPostProcessor {
     // 为bean的初始化之前提供回调入口

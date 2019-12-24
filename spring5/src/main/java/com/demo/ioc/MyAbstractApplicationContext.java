@@ -1,4 +1,4 @@
-package com.demo.core;
+package com.demo.ioc;
 
 /**
  * IOC容器实现类的顶层抽象类，实现IOC容器相关的公共逻辑。

@@ -1,4 +1,4 @@
-package com.demo.core;
+package com.demo.ioc;
 
 public interface MyFactoryBean {
 }
