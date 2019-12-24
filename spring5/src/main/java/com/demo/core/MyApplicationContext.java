@@ -1,5 +1,10 @@
 package com.demo.core;
 
+import com.xyz.demo.core.annotaion.MyAutowired;
+import com.xyz.demo.core.annotaion.MyController;
+import com.xyz.demo.core.annotaion.MyService;
+
+import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -38,12 +43,71 @@ public class MyApplicationContext extends MyDefaultListableBeanFactory implement
      */
     @Override
     public Object getBean(String beanName) throws Exception {
-        return null;//todo
+        // 生成通知事件
+        final MyBeanPostProcessor postProcessor = new MyBeanPostProcessor();
+        final MyBeanDefinition beanDefinition = super.beanDefinitionMap.get(beanName);
+        final Object instance = instantiateBean(beanDefinition);
+        if (instance == null) {
+            return null;
+        }
+
+        // 在实例初始化之前调用一次
+        postProcessor.postProcessBeforeInitialization(instance, beanName);
+
+        final MyBeanWrapper beanWrapper = new MyBeanWrapper(instance);
+        factoryBeanInstanceCache.put(beanName, beanWrapper);
+        // 在实例初始化之后再调用一次
+        postProcessor.postProcessAfterInitialization(instance, beanName);
+        populateBean(beanName, instance);
+
+        return this.factoryBeanInstanceCache.get(beanName).getWrappedInstance();
     }
 
     @Override
     public Object getBean(Class<?> beanClass) throws Exception {
         return getBean(beanClass.getName());
+    }
+
+    private void populateBean(String beanName, Object instance) {
+        final Class<?> clazz = instance.getClass();
+        if (!(clazz.isAnnotationPresent(MyController.class) || clazz.isAnnotationPresent(MyService.class))) {
+            return;
+        }
+        final Field[] declaredFields = clazz.getDeclaredFields();
+        for (Field field : declaredFields) {
+            if (!field.isAnnotationPresent(MyAutowired.class)) {
+                continue;
+            }
+            String autowiredBeanName = field.getAnnotation(MyAutowired.class).value().trim();
+            if ("".equals(autowiredBeanName)) {
+                autowiredBeanName = field.getType().getName();
+            }
+
+            field.setAccessible(true);
+            try {
+                field.set(instance,this.factoryBeanInstanceCache.get(autowiredBeanName));
+            }catch (IllegalAccessException e){
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+    private Object instantiateBean(MyBeanDefinition beanDefinition) {
+        Object instance = null;
+        try {
+            final String className = beanDefinition.getBeanClassName();
+            if (this.factoryBeanInstanceCache.containsKey(className)) {
+                instance = this.factoryBeanInstanceCache.get(className);
+            } else {
+                final Class<?> clazz = Class.forName(className);
+                instance = clazz.newInstance();
+                this.factorySingleBeanCache.put(beanDefinition.getFactoryBeanName(), instance);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return instance;
     }
 
     private void doAutowired() {
@@ -58,6 +122,7 @@ public class MyApplicationContext extends MyDefaultListableBeanFactory implement
             }
         }
     }
+
     private void doRegisterBeanDefinition(List<MyBeanDefinition> beanDefinitions) throws Exception {
         for (MyBeanDefinition bean : beanDefinitions) {
             if (super.beanDefinitionMap.containsKey(bean.getFactoryBeanName())) {
