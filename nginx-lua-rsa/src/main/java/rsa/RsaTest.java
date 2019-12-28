@@ -1,4 +1,4 @@
-package java;
+package rsa;
 
 import org.apache.commons.codec.binary.Base64;
 
@@ -18,6 +18,26 @@ public class RsaTest {
         this.cipher = Cipher.getInstance("RSA");
     }
 
+    public void encryptFile(byte[] input, File output, PrivateKey key)
+            throws IOException, GeneralSecurityException {
+        this.cipher.init(Cipher.ENCRYPT_MODE, key);
+        writeToFile(output, this.cipher.doFinal(input));
+    }
+
+    public void decryptFile(byte[] input, File output, PublicKey key)
+            throws IOException, GeneralSecurityException {
+        this.cipher.init(Cipher.DECRYPT_MODE, key);
+        writeToFile(output, this.cipher.doFinal(input));
+    }
+
+    private void writeToFile(File output, byte[] toWrite)
+            throws IOException {
+        FileOutputStream fos = new FileOutputStream(output);
+        fos.write(toWrite);
+        fos.flush();
+        fos.close();
+    }
+
     public PrivateKey getPrivate(String filename) throws Exception {
         Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());
         byte[] decodedKey = Base64.decodeBase64(filename);
@@ -34,30 +54,9 @@ public class RsaTest {
         return kf.generatePublic(spec);
     }
 
-    public void encryptFile(byte[] input, File output, PrivateKey key)
-            throws IOException, GeneralSecurityException {
-        this.cipher.init(Cipher.ENCRYPT_MODE, key);
-        writeToFile(output, this.cipher.doFinal(input));
-    }
-
-    public void decryptFile(byte[] input, File output, PublicKey key)
-            throws IOException, GeneralSecurityException {
-        this.cipher.init(Cipher.DECRYPT_MODE, key);
-        writeToFile(output, this.cipher.doFinal(input));
-    }
-
-    private void writeToFile(File output, byte[] toWrite)
-            throws IllegalBlockSizeException, BadPaddingException, IOException {
-        FileOutputStream fos = new FileOutputStream(output);
-        fos.write(toWrite);
-        fos.flush();
-        fos.close();
-    }
-
     public String encryptText(String msg, PublicKey key)
             throws UnsupportedEncodingException, IllegalBlockSizeException, BadPaddingException, InvalidKeyException {
         this.cipher.init(Cipher.ENCRYPT_MODE, key);
-        System.out.println("=========" + new String(cipher.doFinal(msg.getBytes("UTF-8"))));
         return Base64.encodeBase64String(cipher.doFinal(msg.getBytes("UTF-8")));
     }
 
@@ -81,25 +80,18 @@ public class RsaTest {
     }
 
     public static void main(String[] args) throws Exception {
-        RsaTest ac = new RsaTest();
-        PrivateKey privateKey = ac.getPrivate(RSAConstants.PRIVATE_KEY);
-        PublicKey publicKey = ac.getPublic(RSAConstants.PUBLIC_KEY);
+        RsaTest rsaTest = new RsaTest();
+        PrivateKey privateKey = rsaTest.getPrivate(RSAConstants.PRIVATE_KEY);
+        PublicKey publicKey = rsaTest.getPublic(RSAConstants.PUBLIC_KEY);
 
-        String firstSegment = "xxxxx";
-        String secondSegment = "xxx";
+        // the path you wang to encrypt
+        String path = "spring-learning/tree/master/nginx-rsa";
+        // encrypt path by public key
+        String encrypted_path = rsaTest.encryptText(path, publicKey);
+        // decrypt path by public key
+        String decrypted_path = rsaTest.decryptText(encrypted_path, privateKey);
 
-        String encrypted_first = ac.encryptText(firstSegment, publicKey);
-        String encrypted_second = ac.encryptText(secondSegment, publicKey);
-
-        String decrypted_first = ac.decryptText(encrypted_first, privateKey);
-        String decrypted_second = ac.decryptText(encrypted_second, privateKey);
-
-        System.out.println(firstSegment + secondSegment);
-        System.out.println();
-        System.out.println("decrypted_first: " + decrypted_first);
-        System.out.println("decrypted_second: " + decrypted_second);
-        System.out.println();
-        System.out.println("encrypted_first: " + encrypted_first);
-        System.out.println("encrypted_second: " + encrypted_second);
+        System.out.println("encrypted_path: " + encrypted_path);
+        System.out.println("decrypted_path: " + decrypted_path);
     }
 }

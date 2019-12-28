@@ -15,4 +15,5 @@ pluginManagement {
 rootProject.name = 'spring-learning'
 include 'spring5'
 include 'spring5'
+include 'nginx-lua-rsa'
 

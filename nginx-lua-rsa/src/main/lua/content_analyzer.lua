@@ -25,14 +25,12 @@ if not priv then
     return
 end
 
-local decoded_first = base64_decoder.dec(ngx.var.arg_first)
-local decoded_second = base64_decoder.dec(ngx.var.arg_second)
+local decoded_path = base64_decoder.dec(ngx.var.path)
 
-local decrypted_first = priv:decrypt(decoded_first)
-local decrypted_second = priv:decrypt(decoded_second)
+local decrypted_path = priv:decrypt(decoded_path)
 
-local host = [[https://xxx.com]]
-local full_path = host .. decrypted_first .. decrypted_second
+local host = [[https://github.com/yanzxu/]]
+local full_path = host .. decrypted_path
 
 ngx.redirect(full_path, 302)
 
