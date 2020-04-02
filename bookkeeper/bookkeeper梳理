@@ -1,0 +1,225 @@
+======== importand =========
+=====Server parameters======
+bookiePort  3181 
+advertisedAddress  eth0 
+useHostNameAsBookieID  false 
+useShortHostName  false 
+bookieDeathWatchInterval  1000 
+
+======== Http server settings =========
+httpServerEnabled  false 
+httpServerPort  8080 
+
+======== Journal settings =========
+journalDirectories  /tmp/bk-journal 
+journalDirectory  /tmp/bk-txn 
+journalFormatVersionToWrite  6 
+journalMaxSizeMB  2048 
+journalMaxBackups  5 
+journalPreAllocSizeMB  16 
+journalWriteBufferSizeKB  64journalRemoveFromPageCache 
+journalRemoveFromPageCache  true 
+journalSyncData  true 
+journalAdaptiveGroupWrites  true 
+journalMaxGroupWaitMSec  2 
+journalBufferedWritesThreshold  524288 
+journalFlushWhenQueueEmpty  false 
+journalAlignmentSize  512 
+journalBufferedEntriesThreshold  0 
+journalFlushWhenQueueEmpty  false 
+journalQueueSize  10000 
+
+======== Ledger storage settings =========
+ledgerStorageClass  org.apache.bookkeeper.bookie.SortedLedgerStorage 
+sortedLedgerStorageEnabled  true 
+ledgerDirectories  /tmp/bk-data 
+indexDirectories  /tmp/bk-data 
+minUsableSizeForIndexFileCreation  1073741824 
+minUsableSizeForEntryLogCreation  1.2 * `logSizeLimit` 
+flushInterval  10000 
+writeBufferSizeBytes  65536 
+
+======== Entry log settings =========
+logSizeLimit  2147483648 
+entryLogFilePreallocationEnabled  true 
+flushEntrylogBytes  0 
+readBufferSizeBytes  512 
+entryLogPerLedgerEnabled  false
+entrylogMapAccessExpiryTimeInSeconds  300 
+maximumNumberOfActiveEntryLogs  500 
+entryLogPerLedgerCounterLimitsMultFactor  10 
+
+======== Entry log compaction settings =========
+compactionRate  1000 
+minorCompactionThreshold  0.2 
+minorCompactionInterval  3600 
+compactionMaxOutstandingRequests  100000 
+majorCompactionThreshold  0.8 
+majorCompactionInterval  86400 
+isThrottleByBytes  false 
+compactionRateByEntries  1000 
+compactionRateByBytes  1000000 
+useTransactionalCompaction  false 
+
+======== Disk utilization =========
+diskUsageThreshold  0.95 
+diskUsageWarnThreshold  0.95
+diskUsageLwmThreshold  0.9 
+diskCheckInterval  10000 
+
+======== Disk utilization =========
+skipListSizeLimit  67108864 
+skipListArenaChunkSize  4194304 
+skipListArenaMaxAllocSize  131072 
+openFileLimit  20000 
+fileInfoCacheInitialCapacity  3181 
+fileInfoMaxIdleTime  0 
+fileInfoFormatVersionToWrite  1 
+pageSize  8192 
+pageLimit  -1 
+numOfMemtableFlushThreads  8 
+
+======== Metadata Service Settings =========
+metadataServiceUri  zk+hierarchical://localhost:2181/ledgers 
+ledgerManagerFactoryClass  hierarchical 
+allowShadedLedgerManagerFactoryClass  false 
+shadedLedgerManagerFactoryClassPrefix  dlshade. 
+
+======== ZooKeeper Metadata Service Settings =========
+zkLedgersRootPath  /ledgers 
+zkServers  localhost:2181 
+zkTimeout  10000 
+zkRetryBackoffStartMs  1000 
+zkRetryBackoffMaxMs  10000 
+zkRequestRateLimit  0 
+zkEnableSecurity  false
+
+
+========= Twitter Ostrich/Science Metrics Provider =========
+statsExport false
+statsHttpPort 9002
+
+=========AutoRecovery replication worker settings =========
+rereplicationEntryBatchSize  10
+openLedgerRereplicationGracePeriod  30000
+lockReleaseOfFailedLedgerGracePeriod  300000 
+rwRereplicateBackoffMs  5000
+
+=========Memory allocator settings =========
+allocatorPoolingPolicy  PooledDirect 
+allocatorPoolingConcurrency  2 * CPUS 
+allocatorOutOfMemoryPolicy  FallbackToHeap 
+allocatorLeakDetectionPolicy  Disabled 
+bookiePort  3181 
+bookiePort  3181 
+bookiePort  3181 
+bookiePort  3181 
+bookiePort  3181 
+bookiePort  3181 
+bookiePort  3181 
+bookiePort  3181 
+bookiePort  3181 
+bookiePort  3181 
+bookiePort  3181 
+
+
+
+
+
+
+
+
+
+
+======== optional =========
+=====Server parameters======
+allowMultipleDirsUnderSameDiskPartition  false 
+listeningInterface  eth0 
+allowLoopback  false 
+useShortHostName  false 
+allowEphemeralPorts  false 
+enableLocalTransport  false 
+bookieDeathWatchInterval  1000 
+extraServerComponents   
+ignoreExtraServerComponentsStartupFailures  false 
+
+======Worker thread settings======
+numAddWorkerThreads  1 
+numReadWorkerThreads  8 
+numLongPollWorkerThreads  0 
+numJournalCallbackThreads  1 
+numHighPriorityWorkerThreads  8 
+maxPendingAddRequestsPerThread  10000 
+maxPendingReadRequestsPerThread  10000 
+enableBusyWait  false 
+
+=====Server parameters======
+requestTimerTickDurationMs  10 
+requestTimerNumTicks  1024 
+
+=====Netty server settings======
+serverTcpNoDelay  true 
+serverSockKeepalive  true 
+serverTcpLinger  0 
+byteBufAllocatorSizeInitial  65536 
+byteBufAllocatorSizeMin  65536 
+byteBufAllocatorSizeMax  1048576 
+nettyMaxFrameSizeBytes  5242880 
+
+======== Security settings =========
+bookieAuthProviderFactoryClass   
+permittedStartupUsers   
+
+======== TLS settings =========
+tslProvider OpenSSL   
+tlsProviderFactoryClass org.apache.bookkeeper.security.SSLContextFactory   
+tlsClientAuthentication  true 
+tlsKeyStoreType  JKS 
+tlsKeyStore   
+tlsTrustStoreType   
+tlsKeyStorePasswordPath   
+tlsTrustStore   
+tlsTrustStorePasswordPath   
+
+======== Garbage collection settings =========
+gcWaitTime  1000 
+gcOverreplicatedLedgerWaitTime  86400000 
+isForceGCAllowWhenNoSpace  false 
+verifyMetadataOnGC  false
+
+======== Disk utilization =========
+diskUsageThreshold  0.95 
+diskUsageWarnThreshold  0.95
+diskUsageLwmThreshold  0.9 
+diskCheckInterval  10000 
+
+======== Statistics =========
+enableStatistics  true 
+statsProviderClass  org.apache.bookkeeper.stats.prometheus.PrometheusMetricsProvider 
+limitStatsLogging  false
+
+ =========Prometheus Metrics Provider Settings  =========
+prometheusStatsHttpPort  prometheusStatsHttpPort 
+prometheusStatsLatencyRolloverSeconds  60 
+
+
+bookiePort  3181 
+bookiePort  3181 
+bookiePort  3181 
+bookiePort  3181 
+bookiePort  3181 
+bookiePort  3181 
+bookiePort  3181 
+bookiePort  3181 
+bookiePort  3181 
+bookiePort  3181 
+bookiePort  3181 
+bookiePort  3181 
+bookiePort  3181 
+bookiePort  3181 
+bookiePort  3181 
+bookiePort  3181 
+bookiePort  3181 
+bookiePort  3181 
+bookiePort  3181 
+bookiePort  3181 
