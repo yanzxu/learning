@@ -2,7 +2,7 @@
 
 ### Flink 运行时组件
 
-![Flink 运行时组件](/Users/yzxu/Documents/bigdata/flink/screenshot/运行时组件.jpg)
+![Flink 运行时组件](./images/运行时组件.jpg)
 
 - JobManager：
   1. 控制一个应用程序执行的主进程，即：每个应用程序都会被一个不同的JobManager所控制执行；
@@ -23,7 +23,7 @@
     3. 当JobManager申请slots资源时，ResourceManager会将有空闲slots的TaskManager分配给JobManager。如果ResourceManager没有足够的slots
     来满足JobManager的请求，它还可以向资源提供平台发起会话，以提供启动TaskManager进程的容器；
     
-    ![ResourceManager作用](/Users/yzxu/Documents/bigdata/flink/screenshot/ResourceManager作用.jpg)
+    ![ResourceManager作用](./images/ResourceManager作用.jpg)
 - Dispatcher：（提交、取消作业；触发、取消、清理作业的savepoints；作业状态、列表查询；）
     1. 可以跨作业运行，它为应用提交提供了REST接口；
     2. 当一个应用被提交执行时，Dispatcher就会启动并将应用移交给一个JobManager；
@@ -31,13 +31,13 @@
     4. Dispatcher在架构中可能并不是必须的，这取决于应用提交运行的方式；
     5. 主要是用于作业的提交、并把它们持久化、为作业创建对应的 JobManager 等；
     
-    ![Dispatcher作用](/Users/yzxu/Documents/bigdata/flink/screenshot/Dispatcher作用.jpg)
+    ![Dispatcher作用](./images/Dispatcher作用.jpg)
     
 - SlotManager：
-    ![SlotManager作用](/Users/yzxu/Documents/bigdata/flink/screenshot/SlotManager作用.jpg)
+    ![SlotManager作用](./images/SlotManager作用.jpg)
     
 ### standalone任务提交流程
-![Flink 运行时组件](/Users/yzxu/Documents/bigdata/flink/screenshot/任务提交流程.jpg)
+![Flink 运行时组件](./images/任务提交流程.jpg)
 
 1. application将应用提交给Dispatcher；
 2. Dispatcher启动并提交应用给JobManager；
@@ -50,7 +50,7 @@
 9. 任务在执行过程中，不同TaskManager可以相互交换数据；
 
 ### TaskManager 和 Slots
-![TaskManager 和 slots](/Users/yzxu/Documents/bigdata/flink/screenshot/TaskManager和Slots.jpg)
+![TaskManager 和 slots](./images/TaskManager和Slots.jpg)
   
 1. Flink中每个TaskManager都是一个JVM进程，它可能会在独立的线程上执行一个或多个subTask；
 2. 为了控制一个TaskManager能接收多少个task，TaskManager通过task slot进行控制，一个TaskManager至少有一个slot；
@@ -71,11 +71,11 @@
 - Processing Time：执行操作算子的本地系统时间，与机器相关；
 
 ### watermark的传递
-![watermark的传递](/Users/yzxu/Documents/bigdata/flink/screenshot/watermark的传递.jpg)
+![watermark的传递](./images/watermark的传递.jpg)
 
 
 ### checkpints（自动的）
-![checkpints](/Users/yzxu/Documents/bigdata/flink/screenshot/checkpoints.jpg)
+![checkpints](./images/checkpoints.jpg)
 
 - Flink故障恢复机制的核心就是应用状态的checkpoints；
 - Checkpoints就是在某个时间点将所有任务的状态存一份快照；该时间点就是所有任务都恰好处理完一个相同的输入数据的时候；
@@ -166,19 +166,19 @@ Session Windows没有固定的Windows Size和Slide Time；
 
 
 ### 任务调度与执行
-![任务调度与执行](/Users/yzxu/Documents/bigdata/flink/screenshot/任务调度与执行.jpg)
+![任务调度与执行](./images/任务调度与执行.jpg)
 
 ### 任务状态
-![任务状态](/Users/yzxu/Documents/bigdata/flink/screenshot/任务状态.jpg)
+![任务状态](./images/任务状态.jpg)
 
 ### 计算资源的调度
-![计算资源的调度](/Users/yzxu/Documents/bigdata/flink/screenshot/计算资源的调度.jpg)
+![计算资源的调度](./images/计算资源的调度.jpg)
 
 ### slotGroup
-![slotGroup](/Users/yzxu/Documents/bigdata/flink/screenshot/slotGroup.jpg)
+![slotGroup](./images/slotGroup.jpg)
 
 ### slot重用
-![slot重用](/Users/yzxu/Documents/bigdata/flink/screenshot/slot重用.jpg)
+![slot重用](./images/slot重用.jpg)
 
 
 ### JobManager的组件
@@ -200,13 +200,13 @@ Session Windows没有固定的Windows Size和Slide Time；
 > IOManager提供了两种方式枚举磁盘文件，一种是直接遍历文件夹下所有文件，另一种是计数器方式，对每个文件名以递增顺序访问。
 
 在底层，flink将文件IO抽象为FileIOChannle，封装了底层实现。
-![FileIOChannel](/Users/yzxu/Documents/bigdata/flink/screenshot/FileIOChannel.png)
+![FileIOChannel](./images/FileIOChannel.png)
 
 #### NetworkEnvironment
 > 是TaskManager的网络IO组件，包含了追踪中间结果和数据交换的数据结构。它的构造器会统一将配置的内存先分配出来，抽象成 NetworkBufferPool 统一管理内存的申请和释放。意思是说，在输入和输出数据时，不管是保留在本地内存，等待chain在一起的下个操作符进行处理，还是通过网络把本操作符的计算结果发送出去，都被抽象成了NetworkBufferPool。后续我们还将对这个组件进行详细分析。
 
 ### 名词解释
-![执行图](/Users/yzxu/Documents/bigdata/flink/screenshot/执行图.png)
+![执行图](./images/执行图.png)
 - StreamNode：用来代表 operator 的类，并具有所有相关的属性，如并发度、入边和出边等。
 - StreamEdge：表示连接两个StreamNode的边。
 - JobGraph：StreamGraph经过优化后生成了 JobGraph，提交给 JobManager 的数据结构。
@@ -227,3 +227,19 @@ Session Windows没有固定的Windows Size和Slide Time；
   InputGate：代表Task的输入封装，和JobGraph中JobEdge一一对应。每个InputGate消费了一个或多个的ResultPartition。
 -  InputChannel：每个InputGate会包含一个以上的InputChannel，和ExecutionGraph中的ExecutionEdge一一对应，也和ResultSubpartition一对一地相连，即一个InputChannel接收一个ResultSubpartition的输出。
 
+ ![执行图](./images/执行图.png)
+ ****
+ 
+ ### Flink Master启动流程图
+![Flink-Master启动流程图](./images/Flink-Master启动流程图.jpg)
+
+-------
+
+
+### yarn申请资源
+![yarn申请资源](./images/yarn申请资源.jpg)
+
+-------
+
+### yarn申请资源
+![从TM获取slot](./images/从TM获取slot.jpg)
