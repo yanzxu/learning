@@ -165,11 +165,11 @@ local function ssl_err()
     return nil, tab_concat(err_queue, ": ", 1, i - 1)
 end
 
-local function read_bio(bio)
+local function read_bio(com.bio)
     local BIO_CTRL_PENDING = 10
-    local keylen = C.BIO_ctrl(bio, BIO_CTRL_PENDING, 0, nil);
+    local keylen = C.BIO_ctrl(com.bio, BIO_CTRL_PENDING, 0, nil);
     local key = ffi.new("char[?]", keylen)
-    if C.BIO_read(bio, key, keylen) < 0 then
+    if C.BIO_read(com.bio, key, keylen) < 0 then
         return ssl_err()
     end
     return ffi_str(key, keylen)
@@ -258,10 +258,10 @@ function _M.new(_, opts)
     end
 
     local bio_method = C.BIO_s_mem()
-    local bio = C.BIO_new(bio_method)
-    ffi_gc(bio, C.BIO_vfree)
+    local com.bio = C.BIO_new(bio_method)
+    ffi_gc(com.bio, C.BIO_vfree)
 
-    local len = C.BIO_puts(bio, key)
+    local len = C.BIO_puts(com.bio, key)
     if len < 0 then
         return ssl_err()
     end
@@ -273,7 +273,7 @@ function _M.new(_, opts)
         ffi_copy(pass, opts.password, plen)
     end
 
-    local rsa = read_func(bio, nil, nil, pass)
+    local rsa = read_func(com.bio, nil, nil, pass)
     if rsa == nil then
         return ssl_err()
     end
