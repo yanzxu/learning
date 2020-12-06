@@ -242,4 +242,4 @@ Session Windows没有固定的Windows Size和Slide Time；
 -------
 
 ### yarn申请资源
-![从TM获取slot](./images/从TM获取slot.jpg)
+![从TM获取slot](./images/从TM获取slot.jpg)![](![]())
