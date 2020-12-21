@@ -41,6 +41,13 @@ dependencies {
 	implementation 'com.google.code.gson:gson'
 	compile('org.reflections:reflections:0.9.9')
 
+	// https://mvnrepository.com/artifact/mysql/mysql-connector-java
+	compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.21'
+	compile 'org.mybatis:mybatis:3.5.6'
+
+	compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.14.0'
+	compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.14.0'
+
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	compile('org.springframework.boot:spring-boot-starter-web')
 
