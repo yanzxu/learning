@@ -57,6 +57,10 @@
       <name>dfs.namenode.secondary.http-address</name>
       <value>vm03:50090</value>
     </property>
+    <property>
+￼       <name>dfs.namenode.handler.count</name>
+        <value>21</value>
+￼   </property>
 </configuration>
  ```
 
@@ -86,6 +90,21 @@
    <property>
        <name>hadoop.proxyuser.root.groups</name>
        <value>*</value>
+   </property>
+   <property>
+       <name>io.compression.codecs</name>
+       <value>
+         org.apache.hadoop.io.compress.GzipCodec,
+         org.apache.hadoop.io.compress.DefaultCodec,
+         org.apache.hadoop.io.compress.BZip2Codec,
+         org.apache.hadoop.io.compress.SnappyCodec,
+         com.hadoop.compression.lzo.LzoCodec,
+         com.hadoop.compression.lzo.LzopCodec
+       </value>
+   </property>
+   <property>
+       <name>io.compression.codec.lzo.class</name>
+       <value>com.hadoop.compression.lzo.LzoCodec</value>
    </property>
 </configuration>
 ```
@@ -157,6 +176,18 @@
    <property>
        <name>mapreduce.jobhistory.webapp.address</name>
        <value>vm01:19888</value>
+   </property>
+   <property>
+       <name>yarn.app.mapreduce.am.env</name>
+       <value>HADOOP_MAPRED_HOME=${HADOOP_HOME}</value>
+   </property>
+   <property>
+       <name>mapreduce.map.env</name>
+       <value>HADOOP_MAPRED_HOME=${HADOOP_HOME}</value>
+   </property>
+   <property>
+       <name>mapreduce.reduce.env</name>
+       <value>HADOOP_MAPRED_HOME=${HADOOP_HOME}</value>
    </property>
 </configuration>
 ```
