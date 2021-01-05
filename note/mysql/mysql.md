@@ -10,7 +10,7 @@
         <where_condition>
     group by
         <group_by_list>
-    having
+    having``
         <having_condition>
     order by
         <order_by_condition>
