@@ -2,6 +2,8 @@
 
 case $1 in
 "start")
+  echo "===== 启动 zookeeper 集群 ====="
+
   for i in vm01 vm02 vm03
   do
     echo "======== start $i ======="
@@ -10,6 +12,8 @@ case $1 in
 ;;
 
 "stop")
+  echo "===== 停止 zookeeper 集群 ====="
+
   for i in vm01 vm02 vm03
   do
     echo "======== stop $i ======="
@@ -18,6 +22,8 @@ case $1 in
 ;;
 
 "status")
+  echo "===== zookeeper 状态 ====="
+
   for i in vm01 vm02 vm03
   do
     echo "======== status $i ======="

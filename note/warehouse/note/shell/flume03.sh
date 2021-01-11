@@ -2,6 +2,7 @@
 
 case $1 in
 "start") {
+
 for i in vm03
 do
     echo " --------启动 $i 消费 flume-------"
@@ -13,7 +14,7 @@ done
 for i in vm03
 do
     echo " --------停止 $i 消费 flume-------"
-    ssh $i "ps -ef | grep kafka_flume_hdfs | grep -v grep | awk '{print \$2}' | xargs -n1 kill"
+    ssh $i "ps -ef | grep kafka_flume_hdfs | grep -v grep | awk '{print \$2}' | xargs -n1 kill -9"
 done
 };;
 esac
