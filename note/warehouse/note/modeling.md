@@ -14,7 +14,7 @@ location '/warehouse/gmall/ods/ods_log'
 2. 加载数据
 ```shell script
 load data inpath '/origin_data/gmall/log/topic_log/2020-06-14'
-input table ods_log partition(dt=2020-06-14);
+overwrite into table ods_log partition (dt='2020-06-14');
 ```
 
 3. 查看是否加载成功：`select * from ods_log limit 2;`
