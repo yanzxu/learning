@@ -66,6 +66,17 @@ import_order_status_log(){
             where date_format(operate_time,'%Y-%m-%d')='$do_date'"
 }
 
+import_activity_order(){
+  import_data activity_order "select
+                           id,
+                           activity_id,
+                           order_id,
+                           create_time
+                         from activity_order
+                         where
+date_format(create_time,'%Y-%m-%d')='$do_date'"
+}
+
 import_user_info(){
   import_data "user_info" "select
             id,

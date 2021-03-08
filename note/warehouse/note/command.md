@@ -8,6 +8,7 @@
   
 #### Hive
  - 启动：`bin/hive`
+ - 启动服务端：`nohup ./bin/hiveserver2 1>/opt/module/hive/log/hiveserver2.log 2>&1  &`
 
 
 #### yarn
