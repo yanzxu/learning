@@ -5,14 +5,14 @@ import java.io.InputStream;
 
 public class Request {
     private final InputStream inputStream;
-    private String uri;
+    private String resourceName;
 
     public Request(InputStream inputStream) {
         this.inputStream = inputStream;
     }
 
     public void parse() {
-        StringBuffer requestBuffer = new StringBuffer(2048);
+        StringBuilder stringBuilder = new StringBuilder(2048);
         int byteCount;
         byte[] buffer = new byte[2048];
 
@@ -24,16 +24,17 @@ public class Request {
         }
 
         for (int j = 0; j < byteCount; j++) {
-            requestBuffer.append((char) buffer[j]);
+            stringBuilder.append((char) buffer[j]);
         }
 
-        uri = parseUri(requestBuffer.toString());
+        resourceName = parseUri(stringBuilder.toString());
     }
 
-    public String getUri() {
-        return uri;
+    public String getResourceName() {
+        return resourceName;
     }
 
+    // request请求行 "GET /index.html HTTP/1.1"
     private String parseUri(String request) {
         int index1, index2;
         index1 = request.indexOf(' ');

@@ -23,7 +23,7 @@ public class Response {
         FileInputStream fileInputStream = null;
 
         try {
-            File file = new File(HttpServer.WEB_ROOT, request.getUri());
+            File file = new File(HttpServer.WEB_ROOT, request.getResourceName());
             if (file.exists()){
                 outputStream.write("HTTP/1.1 200 OK\r\n".getBytes());
                 outputStream.write(("ContentType: text/html\r\n").getBytes());

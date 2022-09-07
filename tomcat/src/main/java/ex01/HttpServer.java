@@ -51,7 +51,7 @@ public class HttpServer {
 
                 socket.close();
 
-                shutdown = request.getUri().equals(SHUTDOWN_COMMAND);
+                shutdown = request.getResourceName().equals(SHUTDOWN_COMMAND);
             } catch (IOException e) {
                 e.printStackTrace();
             }
